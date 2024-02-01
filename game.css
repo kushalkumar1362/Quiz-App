@@ -34,3 +34,34 @@
   background-color: rgb(236, 57, 57);
   border: none;
 }
+
+#hud{
+  display: flex;
+  justify-content: space-between;
+}
+
+.hud-prefix{
+  text-align: center;
+  font-size: 2rem;
+}
+
+.hud-main-text{
+  text-align: center;
+}
+
+#progressBar {
+  width: 25rem;
+  height: 4.4rem;
+  border: 0.3rem solid #56a5eb;
+  margin-top: 1.5rem;
+}
+
+#progressBarFull{
+  width: 1%; 
+  height: 100%; 
+  text-align: center; 
+  font-size: 1.5rem;
+  line-height: 40px; 
+  color: rgb(13, 24, 29); 
+  background-color: #56a5eb;
+}
