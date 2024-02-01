@@ -17,6 +17,12 @@ h1 {
   margin-bottom: 5rem;
 }
 
+h2 {
+  font-size: 4.2rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+}
+
 /* Utiliies */
 .container {
   height: 100vh;
@@ -26,6 +32,7 @@ h1 {
   align-items: center;
   max-width: 80rem;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 .container > * {
@@ -42,6 +49,9 @@ h1 {
   flex-direction: column;
 }
 
+.justify-center {
+  justify-content: center;
+}
 
 /* BUTTON */
 .btn {
