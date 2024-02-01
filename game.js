@@ -84,8 +84,7 @@ let questions = [
     choice1: "elements can be accesses from anywhere",
     choice2: "The size of the array is fixed",
     choice3: "Indexing is started from zero",
-    choice4:
-      "Memory waste if an array's elements are smaller than the size alloted to them",
+    choice4: "Memory waste if an array's elements are smaller than the size alloted to them",
     answer: 4,
   },
   {
@@ -94,32 +93,31 @@ let questions = [
     choice2: "num[4] = 0",
     choice3: "num[4] = {1 2 3 4}",
     choice4: "num[4] = {1;2;3;4}",
-    answer: 4,
+    answer: 1,
   },
 ];
 
 let correctBonus = 10;
-let maxQuestions = 4;
+let maxQuestions = 10;
 
 startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questions];
-  console.log(availableQuestions);
   getNewQuestion();
 };
 
 getNewQuestion = () => {
-  if(availableQuestions === 0 || questionCounter >= maxQuestions) {
+  if (availableQuestions === 0 || questionCounter >= maxQuestions) {
     // all questions are visited go to the end of the page
-    return window.location.assign("/end.html")
+    return window.location.assign("/end.html");
   }
   questionCounter++;
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
 
-  choices.forEach(choice => {
+  choices.forEach((choice) => {
     const number = choice.dataset["number"];
     choice.innerText = currentQuestion["choice" + number];
   });
@@ -128,16 +126,22 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
-choices.forEach(choice => {
-    choice.addEventListener("click", e => {
-        if(!acceptingAnswers) return;
+choices.forEach((choice) => {
+  choice.addEventListener("click", (e) => {
+    if (!acceptingAnswers) return;
 
-        acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset["number"];
-        console.log(selectedAnswer);
-        getNewQuestion();
-    })
+    acceptingAnswers = false;
+    const selectedChoice = e.target;
+    const selectedAnswer = selectedChoice.dataset["number"];
+    
+    const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+    selectedChoice.parentElement.classList.add(classToApply);
+
+    setTimeout(() =>{
+      selectedChoice.parentElement.classList.remove(classToApply);
+      getNewQuestion();
+    }, 1000);
   });
+});
 
-startGame(); 
+startGame();
