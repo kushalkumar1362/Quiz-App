@@ -72,3 +72,35 @@ h2 {
   transform: translateY(-0.1rem);
   transition: transform 150ms;
 }
+
+.btn[disabled]:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* FORMS */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input { 
+  margin-bottom: 1rem;
+  width: 20rem;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  border: 0.1rem solid #56a5eb;
+
+  box-shadow: 0 0.1rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+}
+
+*:focus {
+  outline: 0;
+}
+
+input::placeholder {
+  color: #aaa; 
+}
