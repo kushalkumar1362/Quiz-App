@@ -103,3 +103,12 @@ input {
 input::placeholder {
   color: #aaa;
 }
+
+.name_form #name_error{
+	margin-top: -8px;
+  margin-bottom: 1rem;
+  width: 20rem;
+	font-size: 1.2rem;
+	color: #C62828;
+	display: none;
+}

@@ -13,9 +13,10 @@
   <div class="container">
     <div id="end" class="flex-center flex-column">
       <h1 id="finalScore"></h1>
-      <form>
-        <input type="text" name="username" id="username" placeholder="username" />
-        <button type="submit" class="btn" id="saveScoreBtn" onclick="saveHighScore(event)" disabled>
+      <form class="name_form">
+        <input type="text" name="username" id="username" placeholder="username"  autocomplete="off"/>
+        <div id="name_error">The user name field is required</div>
+        <button type="submit" class="btn" id="saveScoreBtn" onclick="saveHighScore(event)">
           Save
         </button>
       </form>
