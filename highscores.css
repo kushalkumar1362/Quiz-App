@@ -1,0 +1,30 @@
+#highScoresList {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 4rem;
+}
+
+.high-score {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.high-score:hover {
+  transform: scale(1.05);
+  background-color: #e0e0e0;
+}
+
+.high-score:nth-child(even) {
+  background-color: #f9f9f9;
+  color: rgba(0, 0, 255, 0.733);
+}
+
+.high-score:nth-child(odd) {
+  background-color: #ffffff;
+  color: rgba(0, 110, 255, 0.733);
+}
