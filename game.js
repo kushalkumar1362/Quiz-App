@@ -27,9 +27,7 @@ fetch("Questions/ArrayQuiz.json")
   });
 
 let correctBonus = 10;
-// let maxQuestions = 10; 
-
-let maxQuestions = 2; // temporary change 
+let maxQuestions = 10;
 
 startGame = () => {
   questionCounter = 0;
