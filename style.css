@@ -73,12 +73,6 @@ h2 {
   transition: transform 150ms;
 }
 
-.btn[disabled]:hover {
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
 /* FORMS */
 form {
   width: 100%;
