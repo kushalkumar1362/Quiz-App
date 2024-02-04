@@ -4,6 +4,7 @@ const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
 const progressBarFull = document.getElementById("progressBarFull");
 const nextButton = document.getElementById("nextbtn");
+const saveButton = document.getElementById("savebtn");
 
 // Intially
 let currentQuestion = {};
@@ -12,7 +13,11 @@ let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
+let correctBonus = 10;
+let maxQuestions = 10;
 let questions = [];
+// Add a variable to store user answers
+let userAnswers = [];
 
 fetch("Questions/ArrayQuiz.json")
   .then((res) => {
@@ -24,11 +29,8 @@ fetch("Questions/ArrayQuiz.json")
     startGame();
   })
   .catch((err) => {
-    console.error(err);
+    console.error("Question is not fetched", err);
   });
-
-let correctBonus = 10;
-let maxQuestions = 10;
 
 startGame = () => {
   questionCounter = 0;
@@ -47,7 +49,11 @@ getNewQuestion = () => {
   questionCounter++;
   updateProgressBar();
   choices.forEach((choice) => {
-    choice.parentElement.classList.remove("correct", "incorrect");
+    choice.parentElement.classList.remove(
+      "correct",
+      "incorrect",
+      "select_choice"
+    );
   });
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
@@ -64,13 +70,51 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
-// Add a variable to store user answers
-let userAnswers = [];
+// Update the event listener for the "Save" button
+let saveButtonClicked = false; // Variable to track if the save button is clicked
 
-// Update the event listener for the "Save & Next" button
+saveButton.addEventListener("click", () => {
+  if (!saveButtonClicked) {
+    const selectedChoices = document.querySelectorAll(
+      ".choice-container.selected"
+    );
+    console.log(selectedChoices);
+    if (selectedChoices.length > 0) {
+      selectedChoices.forEach((selectedChoice) => {
+        selectedChoice.classList.remove("select_choice"); // Remove the select_choice class
+        const selectedAnswer = selectedChoice.querySelector(".choice-text");
+        const selectedNumber = selectedAnswer.dataset.number;
+        const isCorrect = selectedNumber == currentQuestion.answer;
+        console.log(selectedNumber, currentQuestion.answer);
+        const classToApply = isCorrect ? "correct" : "incorrect";
+        selectedChoice.classList.add(classToApply); // Add either correct or incorrect class based on user's choice
+        choices.forEach((choice) => {
+          const number = choice.dataset["number"];
+          choice.innerText = currentQuestion["choice" + number];
+          if (number == currentQuestion.answer) {
+            choice.parentElement.classList.add("correct");
+          }
+        });
+      });
+      saveButtonClicked = true; // Mark the save button as clicked for the current question
+    } else {
+      alert("Please select an answer before proceeding to the save question.");
+    }
+  } else {
+    alert("You have already saved your answer for this question.");
+  }
+});
+
+// Update the event listener for the "Next" button
 nextButton.addEventListener("click", () => {
+  if (!saveButtonClicked) {
+    alert("Please save your answer before proceeding to the next question.");
+    return; // Exit the function without proceeding
+  }
   // Save the user's answer
-  const selectedChoices = document.querySelectorAll(".choice-container.selected");
+  const selectedChoices = document.querySelectorAll(
+    ".choice-container.selected"
+  );
   console.log("Selected choices:", selectedChoices); // Log selected choices for debugging
   if (selectedChoices.length > 0) {
     selectedChoices.forEach((selectedChoice) => {
@@ -79,6 +123,7 @@ nextButton.addEventListener("click", () => {
     });
     console.log("User answers:", userAnswers); // Log user answers for debugging
     checkAndUpdateScore();
+    saveButtonClicked = false;
     getNewQuestion();
   } else {
     alert("Please select an answer before proceeding to the next question.");
@@ -95,7 +140,7 @@ function checkAndUpdateScore() {
   let allCorrect = true;
 
   // Check if all selected choices match the correct choice
-  selectedChoiceTexts.forEach(selectedChoiceText => {
+  selectedChoiceTexts.forEach((selectedChoiceText) => {
     if (selectedChoiceText !== correctChoiceText) {
       allCorrect = false;
     }
@@ -104,7 +149,6 @@ function checkAndUpdateScore() {
   if (allCorrect) {
     incrementScore(correctBonus); // Increment score if all selected choices are correct
   }
-
   // Clear user choices array for the next question
   userAnswers = [];
 }
@@ -123,32 +167,25 @@ choices.forEach((choice) => {
       // If already selected, deselect it
       selectedChoice.classList.remove("selected");
       // Remove the color class
-      if (selectedChoice.classList.contains("correct")) {
-        selectedChoice.classList.remove("correct");
-      } else {
-        selectedChoice.classList.remove("incorrect");
-      }
-      acceptingAnswers = true; // Allow selecting again
+      selectedChoice.classList.remove("select_choice");
       return;
     }
 
     // Select the clicked choice
     selectedChoice.classList.add("selected");
+    selectedChoice.classList.add("select_choice");
 
-    const isCorrect = selectedNumber == currentQuestion.answer;
-    const classToApply = isCorrect ? "correct" : "incorrect";
-    selectedChoice.classList.add(classToApply);
-
-    // Check if all selected choices are correct before incrementing the score
-    const allSelectedChoices = document.querySelectorAll(".choice-container.selected");
+    const allSelectedChoices = document.querySelectorAll(
+      ".choice-container.selected"
+    );
     acceptingAnswers = true;
   });
 });
 
-
 incrementScore = (num) => {
   console.log("Current score:", score); // Add this line for debugging
   score += num;
+  scoreText.innerText = `${score} / ${maxQuestions * 10}`;
   console.log("New score:", score); //
 };
 

@@ -25,13 +25,18 @@
   width: 100%;
 }
 
-.correct {
+.select_choice{
   background-color: rgb(17, 139, 196);
   border: none;
 }
 
+.correct {
+  background-color: rgb(27, 173, 27);
+  border: none;
+}
+
 .incorrect {
-  background-color: rgb(17, 139, 196);
+  background-color: rgb(236, 57, 57);
   border: none;
 }
 
@@ -68,24 +73,24 @@
 }
 
 .temp {
-    display: flex;
-    justify-content: center;
+  display: flex;
   margin-top: 1rem;
-
+  justify-content: center;
+  gap: 10px;
 }
 
-.savebtn {
+.nextBtn,
+.saveBtn {
   font-size: 1.8rem;
   padding: 1rem 0;
-  width: 20rem;
+  width: 12rem;
   text-align: center;
   border: 0.1rem solid white;
   color: white;
   background-color: #56a5eb;
-
 }
 
-.savebtn:hover {
+.nextBtn:hover ,.saveBtn:hover {
   cursor: pointer;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
   transform: translateY(0.1rem);
