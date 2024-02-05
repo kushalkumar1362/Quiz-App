@@ -1,5 +1,5 @@
 :root {
-  background-color: #dfd6d6;
+  background: linear-gradient(to bottom, #dfd6d6, #f5f5f5);
   font-size: 62.5%;
 }
 
@@ -20,12 +20,23 @@ h1 {
 h2 {
   font-size: 3.2rem;
   font-weight: 700;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+}
+
+@media only screen and (max-width: 768px) {
+  h1 {
+    font-size: 4rem;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 2.4rem;
+  }  
 }
 
 /* Utiliies */
 .container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -58,6 +69,7 @@ h2 {
   font-size: 1.8rem;
   padding: 1rem 0;
   width: 20rem;
+  max-width: 100%;
   text-align: center;
   border: 0.1rem solid #56a5eb;
   margin-bottom: 1rem;
@@ -84,6 +96,7 @@ form {
 input {
   margin-bottom: 1rem;
   width: 20rem;
+  max-width: 100%;
   padding: 1.5rem;
   font-size: 1.8rem;
   border: none;

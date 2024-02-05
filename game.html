@@ -10,23 +10,31 @@
 </head>
 
 <body>
+    <!-- Main container -->
     <div class="container">
+        <!-- Game section -->
         <div id="game" class="justify-center flex-column">
 
+            <!-- HUD (Heads-Up Display) section -->
             <div id="hud">
+                <!-- Progress indicator -->
                 <div id="hud-item">
                     <p id="progressText" class="hud-prefix">Question</p>
                     <div id="progressBar">
                         <div id="progressBarFull"></div>
                     </div>
                 </div>
+                <!-- Score display -->
                 <div id="hud-item">
                     <p class="hud-prefix">Score</p>
                     <h1 class="hud-main-text" id="score">0 / 100</h1>
                 </div>
             </div>
 
+            <!-- Question display -->
             <h2 id="question">What is the answer of this Question?</h2>
+
+            <!-- Choices container -->
             <div class="choice-container">
                 <p class="choice-prefix">A</p>
                 <p class="choice-text" data-number=1>Choice1</p>
@@ -46,12 +54,16 @@
                 <p class="choice-prefix">D</p>
                 <p class="choice-text" data-number=4>Choice4</p>
             </div>
-            <div class="temp">
+
+            <!-- saveAndNext buttons container -->
+            <div class="saveAndNext">
+                <!-- Save button -->
                 <div id="savebtn" class="flex-center flex-column">
                     <button type="submit" class="saveBtn">
                         Save
                     </button>
                 </div>
+                <!-- Next button -->
                 <div id="nextbtn" class="flex-center flex-column">
                     <button type="submit" class="nextBtn">
                         Next
@@ -60,6 +72,7 @@
             </div>
         </div>
     </div>
+    <!-- Linking to external JavaScript file -->
     <script src="game.js"></script>
 </body>
 

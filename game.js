@@ -19,6 +19,7 @@ let questions = [];
 // Add a variable to store user answers
 let userAnswers = [];
 
+// Fetch questions from JSON file
 fetch("Questions/ArrayQuiz.json")
   .then((res) => {
     return res.json();
@@ -40,6 +41,7 @@ startGame = () => {
   updateProgressBar();
 };
 
+// Function to get a new question
 getNewQuestion = () => {
   if (availableQuestions === 0 || questionCounter >= maxQuestions) {
     // all questions are visited go to the end of the page
@@ -70,9 +72,8 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
-// Update the event listener for the "Save" button
-let saveButtonClicked = false; // Variable to track if the save button is clicked
-
+// Event listener for the "Save" button
+let saveButtonClicked = false;
 saveButton.addEventListener("click", () => {
   if (!saveButtonClicked) {
     const selectedChoices = document.querySelectorAll(
@@ -81,13 +82,13 @@ saveButton.addEventListener("click", () => {
     console.log(selectedChoices);
     if (selectedChoices.length > 0) {
       selectedChoices.forEach((selectedChoice) => {
-        selectedChoice.classList.remove("select_choice"); // Remove the select_choice class
+        selectedChoice.classList.remove("select_choice"); 
         const selectedAnswer = selectedChoice.querySelector(".choice-text");
         const selectedNumber = selectedAnswer.dataset.number;
         const isCorrect = selectedNumber == currentQuestion.answer;
         console.log(selectedNumber, currentQuestion.answer);
         const classToApply = isCorrect ? "correct" : "incorrect";
-        selectedChoice.classList.add(classToApply); // Add either correct or incorrect class based on user's choice
+        selectedChoice.classList.add(classToApply);
         choices.forEach((choice) => {
           const number = choice.dataset["number"];
           choice.innerText = currentQuestion["choice" + number];
@@ -96,7 +97,7 @@ saveButton.addEventListener("click", () => {
           }
         });
       });
-      saveButtonClicked = true; // Mark the save button as clicked for the current question
+      saveButtonClicked = true; 
     } else {
       alert("Please select an answer before proceeding to the save question.");
     }
@@ -105,7 +106,7 @@ saveButton.addEventListener("click", () => {
   }
 });
 
-// Update the event listener for the "Next" button
+// Event listener for the "Next" button
 nextButton.addEventListener("click", () => {
   if (!saveButtonClicked) {
     alert("Please save your answer before proceeding to the next question.");
@@ -130,6 +131,7 @@ nextButton.addEventListener("click", () => {
   }
 });
 
+// Function to check and update the score
 function checkAndUpdateScore() {
   const selectedChoiceTexts = userAnswers; // Get the selected choice texts
   const correctChoiceText = currentQuestion["choice" + currentQuestion.answer]; // Get the correct choice text
@@ -153,6 +155,7 @@ function checkAndUpdateScore() {
   userAnswers = [];
 }
 
+// Event listeners for choice selection
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     console.log("Choice clicked!");
@@ -182,6 +185,7 @@ choices.forEach((choice) => {
   });
 });
 
+// Function to increment the score
 incrementScore = (num) => {
   console.log("Current score:", score); // Add this line for debugging
   score += num;
@@ -189,6 +193,7 @@ incrementScore = (num) => {
   console.log("New score:", score); //
 };
 
+// Function to update progress bar
 function updateProgressBar() {
   const width = (questionCounter / maxQuestions) * 100;
   progressBarFull.style.width = width + "%";
