@@ -25,7 +25,6 @@ fetch("Questions/ArrayQuiz.json")
     return res.json();
   })
   .then((loadedQuestion) => {
-    console.log(loadedQuestion);
     questions = loadedQuestion;
     startGame();
   })
@@ -59,7 +58,6 @@ getNewQuestion = () => {
   });
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
-  console.log(currentQuestion);
 
   question.innerText = currentQuestion.question;
 
@@ -79,14 +77,14 @@ saveButton.addEventListener("click", () => {
     const selectedChoices = document.querySelectorAll(
       ".choice-container.selected"
     );
-    console.log(selectedChoices);
+ 
     if (selectedChoices.length > 0) {
       selectedChoices.forEach((selectedChoice) => {
         selectedChoice.classList.remove("select_choice"); 
         const selectedAnswer = selectedChoice.querySelector(".choice-text");
         const selectedNumber = selectedAnswer.dataset.number;
         const isCorrect = selectedNumber == currentQuestion.answer;
-        console.log(selectedNumber, currentQuestion.answer);
+       
         const classToApply = isCorrect ? "correct" : "incorrect";
         selectedChoice.classList.add(classToApply);
         choices.forEach((choice) => {
@@ -116,13 +114,13 @@ nextButton.addEventListener("click", () => {
   const selectedChoices = document.querySelectorAll(
     ".choice-container.selected"
   );
-  console.log("Selected choices:", selectedChoices); // Log selected choices for debugging
+ 
   if (selectedChoices.length > 0) {
     selectedChoices.forEach((selectedChoice) => {
       userAnswers.push(selectedChoice.querySelector(".choice-text").innerText);
       selectedChoice.classList.remove("selected");
     });
-    console.log("User answers:", userAnswers); // Log user answers for debugging
+   
     checkAndUpdateScore();
     saveButtonClicked = false;
     getNewQuestion();
@@ -135,9 +133,6 @@ nextButton.addEventListener("click", () => {
 function checkAndUpdateScore() {
   const selectedChoiceTexts = userAnswers; // Get the selected choice texts
   const correctChoiceText = currentQuestion["choice" + currentQuestion.answer]; // Get the correct choice text
-
-  console.log("Selected choice texts:", selectedChoiceTexts); // Log selected choice texts for debugging
-  console.log("Correct choice text:", correctChoiceText); // Log correct choice text for debugging
 
   let allCorrect = true;
 
@@ -158,7 +153,6 @@ function checkAndUpdateScore() {
 // Event listeners for choice selection
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
-    console.log("Choice clicked!");
     if (!acceptingAnswers) return;
 
     const selectedChoice = e.target.parentElement; // Parent element contains the choice container
@@ -187,10 +181,8 @@ choices.forEach((choice) => {
 
 // Function to increment the score
 incrementScore = (num) => {
-  console.log("Current score:", score); // Add this line for debugging
   score += num;
   scoreText.innerText = `${score} / ${maxQuestions * 10}`;
-  console.log("New score:", score); //
 };
 
 // Function to update progress bar
@@ -201,4 +193,3 @@ function updateProgressBar() {
   progressText.innerText = `Question ${questionCounter}/${maxQuestions}`;
 }
 
-startGame();
