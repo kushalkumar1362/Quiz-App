@@ -56,7 +56,7 @@
     "answer": 3
   },
   {
-    "question": "Given an array arr = {12, 13, 35, 78, 56} and key = 78; How many iterations are done until the element is found using Binary search?",
+    "question": "Given an array arr = {12, 13, 35, 78, 156} and key = 78; How many iterations are done until the element is found using Binary search?",
     "choice1": "5",
     "choice2": "1",
     "choice3": "3",
