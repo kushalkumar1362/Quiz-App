@@ -20,7 +20,7 @@ let questions = [];
 let userAnswers = [];
 
 // Fetch questions from JSON file
-fetch("Questions/ArrayQuiz.json")
+fetch("Questions/quizQues.json")
   .then((res) => {
     return res.json();
   })
